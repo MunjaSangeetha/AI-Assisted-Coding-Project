@@ -139,41 +139,31 @@
 </div>
 
 <!-- ═══════════════════════════════════════
-     ORDER — DEMO UI ONLY
+     ORDER + PAYMENT
 ═══════════════════════════════════════ -->
 <div id="page-order" class="page">
-
-  <!-- DEMO BANNER -->
-  <div class="demo-banner">
-    ℹ️ <strong>Demo Only</strong> — This is a UI prototype. No real orders are placed, no payments are processed, and no personal data is stored or transmitted.
-  </div>
-
   <div class="order-container">
 
-    <!-- LEFT: Order Form -->
+    <!-- LEFT: Form -->
     <div class="order-form-section">
-      <h1>Place Your <em>Order</em></h1>
-      <p style="color:var(--muted);font-size:.88rem;margin-bottom:32px;">Fill in your details below — this is a demo UI only.</p>
+      <h2>Checkout</h2>
+      <p>Review your cart, fill in your details, and choose how to pay.</p>
 
-      <div class="form-section-title">Your Details</div>
+      <!-- Contact -->
+      <div class="section-label">Contact Details</div>
       <div class="form-row">
-        <div class="field">
-          <label>First Name</label>
-          <input type="text" placeholder="Priya" id="ord-fname" autocomplete="off">
-        </div>
-        <div class="field">
-          <label>Last Name</label>
-          <input type="text" placeholder="Sharma" autocomplete="off">
-        </div>
+        <div class="field"><label>First Name</label><input type="text" placeholder="Priya" id="ord-fname"></div>
+        <div class="field"><label>Last Name</label><input type="text" placeholder="Sharma" id="ord-lname"></div>
       </div>
+      <div class="field"><label>Phone Number</label><input type="tel" placeholder="+91 98765 43210" id="ord-phone"></div>
       <div class="field">
-        <label>Phone Number</label>
-        <input type="tel" placeholder="98765 43210" id="ord-phone" autocomplete="off">
+        <label>Email (optional)</label>
+        <input type="email" placeholder="you@example.com" id="ord-email">
       </div>
 
-      <div class="form-section-title">Order Type</div>
+      <!-- Order Type -->
+      <div class="section-label">Order Type</div>
       <div class="field">
-        <label>Select Type</label>
         <select id="ord-type">
           <option>Dine In</option>
           <option>Takeaway</option>
@@ -181,71 +171,96 @@
         </select>
       </div>
       <div class="field" id="addr-field" style="display:none">
-        <label>Delivery Address (Demo)</label>
-        <textarea placeholder="This field is for UI demo purposes only. No data is stored."></textarea>
+        <label>Delivery Address</label>
+        <textarea placeholder="House no, Street, Area, City..." id="ord-addr"></textarea>
+      </div>
+      <div class="field">
+        <label>Special Instructions</label>
+        <textarea placeholder="Any allergies, preferences, or notes..." id="ord-note"></textarea>
       </div>
 
-      <!-- PAYMENT — DEMO ONLY -->
-      <div class="form-section-title">
-        Payment Method
-        <span class="demo-tag">UI Demo — No real transactions</span>
-      </div>
+      <!-- Payment Methods -->
+      <div class="section-label">Payment Method</div>
+      <div class="payment-methods">
 
-      <div class="payment-options">
-        <label class="pay-option">
-          <input type="radio" name="payment" value="cod" checked>
-          <div class="pay-card">
-            <div class="pay-icon">💵</div>
-            <div class="pay-label">Cash on Delivery</div>
-          </div>
-        </label>
-        <label class="pay-option">
-          <input type="radio" name="payment" value="card">
-          <div class="pay-card">
-            <div class="pay-icon">💳</div>
-            <div class="pay-label">Card (Demo)</div>
-          </div>
-        </label>
-        <label class="pay-option">
-          <input type="radio" name="payment" value="upi">
-          <div class="pay-card">
-            <div class="pay-icon">📱</div>
-            <div class="pay-label">UPI (Demo)</div>
-          </div>
-        </label>
-      </div>
+        <!-- Card -->
+        <div class="payment-option">
+          <input type="radio" name="payment" id="pay-card" value="card">
+          <label class="payment-label" for="pay-card">
+            <span class="payment-icon">💳</span>
+            <span class="payment-name">Card</span>
+            <span class="payment-sub">Debit / Credit</span>
+          </label>
+        </div>
 
-      <!-- Card Demo Notice (shown when Card selected) -->
-      <div class="payment-demo-notice" id="card-details">
-        <div class="demo-notice-box">
-          <span class="demo-notice-icon">🔒</span>
-          <div>
-            <strong>Card Payment — Demo Only</strong>
-            <p>In a real app, a secure payment gateway (like Razorpay or Stripe) would appear here. No card fields are shown as this is a UI prototype only.</p>
-          </div>
+        <!-- UPI -->
+        <div class="payment-option">
+          <input type="radio" name="payment" id="pay-upi" value="upi">
+          <label class="payment-label" for="pay-upi">
+            <span class="payment-icon">📱</span>
+            <span class="payment-name">UPI</span>
+            <span class="payment-sub">GPay, PhonePe…</span>
+          </label>
+        </div>
+
+        <!-- Net Banking -->
+        <div class="payment-option">
+          <input type="radio" name="payment" id="pay-net" value="netbanking">
+          <label class="payment-label" for="pay-net">
+            <span class="payment-icon">🏦</span>
+            <span class="payment-name">Net Bank</span>
+            <span class="payment-sub">Online transfer</span>
+          </label>
+        </div>
+
+        <!-- Cash on Delivery -->
+        <div class="payment-option">
+          <input type="radio" name="payment" id="pay-cod" value="cod">
+          <label class="payment-label" for="pay-cod">
+            <span class="payment-icon">💵</span>
+            <span class="payment-name">Cash</span>
+            <span class="payment-sub">Pay at counter</span>
+          </label>
         </div>
       </div>
 
-      <!-- UPI Demo Notice (shown when UPI selected) -->
-      <div class="payment-demo-notice" id="upi-details">
-        <div class="demo-notice-box">
-          <span class="demo-notice-icon">📱</span>
-          <div>
-            <strong>UPI Payment — Demo Only</strong>
-            <p>In a real app, a UPI ID field or QR code would appear here via a payment gateway. No real UPI transaction is processed in this prototype.</p>
-          </div>
+      <!-- Card Details (shown when card selected) -->
+      <div class="card-details" id="card-details">
+        <div class="field">
+          <label>Card Holder Name</label>
+          <input type="text" placeholder="Name on card" id="card-holder">
+        </div>
+        <div class="field card-number-wrap">
+          <label>Card Number</label>
+          <input type="text" placeholder="1234 5678 9012 3456" id="card-number" maxlength="19" oninput="formatCardNumber(this)">
+          <span class="card-type-icon" id="card-type-icon">💳</span>
+        </div>
+        <div class="card-row">
+          <div class="field"><label>Expiry</label><input type="text" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)"></div>
+          <div class="field"><label>CVV</label><input type="password" placeholder="•••" maxlength="3"></div>
+          <div class="field"><label>Zip / PIN</label><input type="text" placeholder="500001" maxlength="6"></div>
+        </div>
+      </div>
+
+      <!-- UPI Details (shown when UPI selected) -->
+      <div class="upi-details" id="upi-details">
+        <div class="field">
+          <label>UPI ID</label>
+          <input type="text" placeholder="yourname@upi" id="upi-id">
+        </div>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:-8px;">Or pay directly with your app:</p>
+        <div class="upi-apps">
+          <div class="upi-app" onclick="selectUpiApp(this)">📱 GPay</div>
+          <div class="upi-app" onclick="selectUpiApp(this)">🟣 PhonePe</div>
+          <div class="upi-app" onclick="selectUpiApp(this)">🔵 Paytm</div>
+          <div class="upi-app" onclick="selectUpiApp(this)">🏦 BHIM</div>
+          <div class="upi-app" onclick="selectUpiApp(this)">🟠 Amazon Pay</div>
         </div>
       </div>
 
       <!-- COD confirmation -->
-      <div class="payment-demo-notice" id="cod-details">
-        <div class="demo-notice-box">
-          <span class="demo-notice-icon">✅</span>
-          <div>
-            <strong>Cash on Delivery</strong>
-            <p>You'll pay <strong>₹<span id="cod-amount">0</span></strong> in cash when your order arrives. This is a demo — no real order is placed.</p>
-          </div>
-        </div>
+      <div class="cod-details" id="cod-details">
+        <p>✅ &nbsp; You'll pay <strong>₹<span id="cod-amount">0</span></strong> in cash when you collect / receive your order. Please keep exact change if possible.</p>
       </div>
 
     </div><!-- /order-form-section -->
@@ -260,49 +275,46 @@
           <a onclick="showPage('menu')" style="color:var(--gold);cursor:pointer;font-size:.82rem;">Browse Menu →</a>
         </div>
       </div>
-      <button class="confirm-order-btn" onclick="placeOrder()">Place Demo Order →</button>
-      <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:10px;">⚠ No real order is placed. This is a UI demo.</p>
+      <button class="confirm-order-btn" onclick="placeOrder()">Place Order →</button>
     </div>
 
   </div><!-- /order-container -->
 </div>
 
 <!-- ═══════════════════════════════════════
-     LOGIN — DEMO ONLY
+     LOGIN
 ═══════════════════════════════════════ -->
 <div id="page-login" class="page">
   <div class="login-layout">
     <div class="login-panel">
       <div class="login-box" id="login-form-box">
-        <div class="demo-banner" style="margin-bottom:20px;">
-          🔒 <strong>Demo Only</strong> — No real authentication. No passwords are stored or transmitted.
-        </div>
         <h2>Welcome <em>Back</em></h2>
         <p>Sign in to track your orders and enjoy member rewards.</p>
-        <div style="background:rgba(201,148,58,.08);border:1px solid rgba(201,148,58,.2);border-radius:4px;padding:14px 18px;margin:18px 0;font-size:.82rem;color:var(--muted);">
-          ℹ️ This login form is a <strong>UI prototype</strong>. Enter any details to see the demo flow. No data is collected.
+        <button class="social-btn">
+          <svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 7.5V10.5H13.48C13.25 11.7 12.1 13.5 9 13.5C6.35 13.5 4.2 11.32 4.2 9C4.2 6.68 6.35 4.5 9 4.5C10.48 4.5 11.5 5.1 12.07 5.62L14.22 3.55C12.92 2.35 11.12 1.5 9 1.5C4.86 1.5 1.5 4.86 1.5 9C1.5 13.14 4.86 16.5 9 16.5C13.32 16.5 16.2 13.5 16.2 9.15C16.2 8.58 16.14 8.16 16.05 7.5H9Z" fill="#4285F4"/></svg>
+          Continue with Google
+        </button>
+        <div class="divider"><div class="divider-line"></div><span>or sign in with email</span><div class="divider-line"></div></div>
+        <div class="field"><label>Email Address</label><input type="email" placeholder="you@example.com"></div>
+        <div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div>
+        <div style="text-align:right;margin-top:-10px;margin-bottom:20px;">
+          <a style="font-size:.82rem;color:var(--coffee);cursor:pointer;" onclick="showToast('Password reset link sent!')">Forgot password?</a>
         </div>
-        <div class="field"><label>Email (Demo)</label><input type="text" placeholder="you@example.com" autocomplete="off"></div>
-        <div class="field"><label>Password (Demo)</label><input type="text" placeholder="Any text — not a real password field" autocomplete="off"></div>
-        <button class="btn-primary" style="width:100%;padding:16px;" onclick="handleLogin()">Enter Demo →</button>
-        <div class="switch-link">Don't have an account? <a onclick="toggleAuth()">See signup demo</a></div>
+        <button class="btn-primary" style="width:100%;padding:16px;" onclick="handleLogin()">Sign In →</button>
+        <div class="switch-link">Don't have an account? <a onclick="toggleAuth()">Create one</a></div>
       </div>
       <div class="login-box" id="signup-form-box" style="display:none">
-        <div class="demo-banner" style="margin-bottom:20px;">
-          🔒 <strong>Demo Only</strong> — No account is created. No data is stored.
-        </div>
         <h2>Join <em>Sitara</em></h2>
         <p>Create your account and unlock exclusive member benefits.</p>
-        <div style="background:rgba(201,148,58,.08);border:1px solid rgba(201,148,58,.2);border-radius:4px;padding:14px 18px;margin:18px 0;font-size:.82rem;color:var(--muted);">
-          ℹ️ This signup form is a <strong>UI prototype</strong>. No account is created, no email is sent, no data is collected.
-        </div>
         <div class="form-row">
-          <div class="field"><label>First Name</label><input type="text" placeholder="Priya" autocomplete="off"></div>
-          <div class="field"><label>Last Name</label><input type="text" placeholder="Sharma" autocomplete="off"></div>
+          <div class="field"><label>First Name</label><input type="text" placeholder="Priya"></div>
+          <div class="field"><label>Last Name</label><input type="text" placeholder="Sharma"></div>
         </div>
-        <div class="field"><label>Email (Demo)</label><input type="text" placeholder="you@example.com" autocomplete="off"></div>
-        <button class="btn-primary" style="width:100%;padding:16px;" onclick="handleLogin()">Create Demo Account →</button>
-        <div class="switch-link">Already have an account? <a onclick="toggleAuth()">Sign in demo</a></div>
+        <div class="field"><label>Email Address</label><input type="email" placeholder="you@example.com"></div>
+        <div class="field"><label>Password</label><input type="password" placeholder="Create a strong password"></div>
+        <div class="field"><label>Confirm Password</label><input type="password" placeholder="Repeat your password"></div>
+        <button class="btn-primary" style="width:100%;padding:16px;" onclick="handleLogin()">Create Account →</button>
+        <div class="switch-link">Already have an account? <a onclick="toggleAuth()">Sign in</a></div>
       </div>
     </div>
     <div class="login-visual">
@@ -352,14 +364,14 @@
   <div class="thankyou-page">
     <div class="confetti" id="confetti-container"></div>
     <div class="ty-icon">☕</div>
-    <div class="ty-star">★ &nbsp; Demo Order Confirmed &nbsp; ★</div>
+    <div class="ty-star">★ &nbsp; Order Confirmed &nbsp; ★</div>
     <h1 class="ty-title">Thank You,<br><em>Sitara Star!</em></h1>
-    <p class="ty-desc">This is a demo confirmation. In a real app, your order would now be brewing! We hope you enjoyed exploring the Sitara Coffee UI.</p>
+    <p class="ty-desc">Your order is brewing! We're crafting your perfect cup with love and care. You'll be notified when it's ready.</p>
     <div class="ty-card">
-      <div class="ty-order-id">Demo Order Number</div>
+      <div class="ty-order-id">Order Number</div>
       <div class="ty-order-num" id="ty-order-num">#SC-0000</div>
-      <div class="ty-payment-method" id="ty-payment-method">Demo — No real payment processed</div>
-      <div class="ty-eta">⏱ Simulated time: <strong style="color:var(--gold)">15–20 minutes</strong></div>
+      <div class="ty-payment-method" id="ty-payment-method">Paid via Cash on Delivery</div>
+      <div class="ty-eta">⏱ Estimated time: <strong style="color:var(--gold)">15–20 minutes</strong></div>
     </div>
     <div class="ty-actions">
       <button class="btn-primary" onclick="showPage('home')">Back to Home</button>
@@ -368,14 +380,14 @@
   </div>
 </div>
 
-<!-- Scripts — only local files, no external unknown scripts -->
+<!-- Scripts -->
 <script src="js/menu-data.js"></script>
 <script src="js/app.js"></script>
+<!-- Keep cod-amount in sync -->
 <script>
-  // Keep cod-amount in sync (safe interval, no redirects or tracking)
-  setInterval(function() {
-    var el = document.getElementById('cod-amount');
-    if (el && typeof getCartTotals === 'function') el.textContent = getCartTotals().total;
+  setInterval(() => {
+    const el = document.getElementById('cod-amount');
+    if (el) el.textContent = (typeof getCartTotals === 'function') ? getCartTotals().total : 0;
   }, 500);
 </script>
 </body>
